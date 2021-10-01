@@ -7,6 +7,7 @@ class DefaultConfig(object):
     DEBUG = True
 
     SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/test.db'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 PROFILE = os.environ.get('PROFILE', 'default')

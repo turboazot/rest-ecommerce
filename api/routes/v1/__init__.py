@@ -2,7 +2,8 @@ import flask
 import flask_restx
 
 import api.config
-import api.routes.v1.services
+import api.routes.v1.products
+import api.routes.v1.users
 
 
 def get_blueprint():
@@ -15,6 +16,7 @@ def get_blueprint():
                                 version='1',
                                 description='Rest API v1')
 
-    v1_routes.add_namespace(api.routes.v1.services.services_ns)
+    v1_routes.add_namespace(api.routes.v1.products.products_ns)
+    v1_routes.add_namespace(api.routes.v1.users.users_ns)
 
     return v1_bp
