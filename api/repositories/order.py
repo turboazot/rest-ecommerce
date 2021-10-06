@@ -12,9 +12,6 @@ def create(user_id, data):
     order = Order()
     user = User.query.get_or_404(user_id)
 
-    if Order.query.filter_by(user_id=user_id, status="pending").count() > 1:
-        abort(http.HTTPStatus.BAD_REQUEST, "Finish existing order before creating another")
-
     order.user = user
     order.status = "pending"
 

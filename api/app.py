@@ -31,6 +31,8 @@ def create_app(config=api.config.Config):
         }
     })
 
+    app.url_map.strict_slashes = False
+
     register_blueprints(app)
     register_extensions(app)
 

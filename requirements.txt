@@ -5,3 +5,4 @@ flask-marshmallow==0.14.0
 marshmallow-sqlalchemy==0.26.1
 pylint_flask_sqlalchemy
 pylint-flask==0.6
+Faker==8.14.1
