@@ -6,8 +6,10 @@ import click
 from faker import Faker
 import api.repositories.user as user_repository
 import api.repositories.product as product_repository
+from api.metrics import metrics
 
 app = api.app.create_app()
+metrics.init_app(app)
 
 
 @app.cli.command('migrate')
