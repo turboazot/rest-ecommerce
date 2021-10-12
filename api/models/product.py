@@ -3,9 +3,9 @@ from api.extensions import db
 
 class Product(db.Model):
     __tablename__ = 'products'
-    __table_args__ = {'sqlite_autoincrement': True}
+    query = db.default_session.query_property()
 
-    id = db.Column('id', db.Integer, primary_key=True)
+    id = db.Column('id', db.String(36), primary_key=True)
     name = db.Column('name', db.String(127), unique=True)
     price = db.Column('price', db.Float)
 

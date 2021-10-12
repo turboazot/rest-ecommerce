@@ -2,7 +2,7 @@ import flask
 import flask_restx
 import http
 from api.schemas.product import ProductSchema
-from api.helpers.response_list import ResponseList
+from api.helpers.response_pagination import ResponsePagination
 from api.helpers.response_single import ResponseSingle
 from api.helpers.response_ok import ResponseOK
 import api.repositories.product as product_repository
@@ -20,7 +20,7 @@ class Products(flask_restx.Resource):
 
         products = product_repository.get_all(page, per_page)
 
-        return ResponseList(products, ProductSchema()).render()
+        return ResponsePagination(products, ProductSchema()).render()
     
     @staticmethod
     def post():

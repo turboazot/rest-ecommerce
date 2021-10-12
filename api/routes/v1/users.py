@@ -4,6 +4,7 @@ import http
 from api.schemas.user import UserSchema
 from api.schemas.order import OrderSchema
 from api.schemas.order_item import OrderItemSchema
+from api.helpers.response_pagination import ResponsePagination
 from api.helpers.response_list import ResponseList
 from api.helpers.response_single import ResponseSingle
 from api.helpers.response_ok import ResponseOK
@@ -24,7 +25,7 @@ class Users(flask_restx.Resource):
 
         users = user_repository.get_all(page, per_page)
 
-        return ResponseList(users, UserSchema()).render()
+        return ResponsePagination(users, UserSchema()).render()
     
     @staticmethod
     def post():
@@ -54,10 +55,7 @@ class UserSingle(flask_restx.Resource):
 class Orders(flask_restx.Resource):
     @staticmethod
     def get(user_id):
-        page = int(flask.request.args.get('page', 1))
-        per_page = int(flask.request.args.get('per-page', 10))
-
-        orders = order_repository.get_all(user_id, page, per_page)
+        orders = order_repository.get_all(user_id)
 
         return ResponseList(orders, OrderSchema()).render()
     
@@ -89,10 +87,7 @@ class OrderSingle(flask_restx.Resource):
 class OrderItemLists(flask_restx.Resource):
     @staticmethod
     def get(user_id, order_id):
-        page = int(flask.request.args.get('page', 1))
-        per_page = int(flask.request.args.get('per-page', 10))
-
-        order_items = order_item_repository.get_all(order_id, page, per_page)
+        order_items = order_item_repository.get_all(order_id)
 
         return ResponseList(order_items, OrderItemSchema()).render()
     
@@ -107,16 +102,16 @@ class OrderItemLists(flask_restx.Resource):
 class OrderItemSingle(flask_restx.Resource):
     @staticmethod
     def get(user_id, order_id, order_item_id):
-        order_item = order_item_repository.get_one(order_item_id)
+        order_item = order_item_repository.get_one(order_id, order_item_id)
         return ResponseSingle(order_item, OrderItemSchema()).render()
     
     @staticmethod
     def patch(user_id, order_id, order_item_id):
         data = flask.request.get_json()
-        order_item = order_item_repository.update(order_item_id, data)
+        order_item = order_item_repository.update(order_id, order_item_id, data)
         return ResponseSingle(order_item, OrderItemSchema()).render()
     
     @staticmethod
     def delete(user_id, order_id, order_item_id):
-        order_item_repository.delete(order_item_id)
+        order_item_repository.delete(order_id, order_item_id)
         return ResponseOK().render()

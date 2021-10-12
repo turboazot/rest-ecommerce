@@ -1,8 +1,7 @@
 version: '3.1'
 
 services:
-
-  db:
+  user:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     environment:
@@ -12,4 +11,24 @@ services:
       MYSQL_PASSWORD: rest
     ports:
       - 3306:3306
+  order1:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: order
+      MYSQL_USER: order
+      MYSQL_PASSWORD: order
+    ports:
+      - 3307:3306
+  order2:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: order
+      MYSQL_USER: order
+      MYSQL_PASSWORD: order
+    ports:
+      - 3308:3306
     
