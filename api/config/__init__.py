@@ -11,7 +11,7 @@ class DefaultConfig(object):
     DB_NAME = 'rest'
     ORDER_DB_USERNAME = os.getenv("ORDER_DB_USERNAME", "order")
     ORDER_DB_PASSWORD = os.getenv("ORDER_DB_PASSWORD", "order")
-    ORDER_DB_NAME = 'order'
+    ORDER_DB_NAME = 'orders'
     ORDER_DB_HOSTS = os.getenv("ORDER_DB_HOSTS", "127.0.0.1:3307,127.0.0.1:3308")
     SQLALCHEMY_DATABASE_URI = 'mysql://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
